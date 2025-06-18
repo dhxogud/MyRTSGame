@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
-#include "InGame_GM.generated.h"
+#include "GameFramework/PlayerState.h"
+#include "InGamePS.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MYRTSGAME_API AInGame_GM : public AGameModeBase
+class MYRTSGAME_API AInGamePS : public APlayerState
 {
 	GENERATED_BODY()
 	
