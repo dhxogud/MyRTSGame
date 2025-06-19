@@ -5,6 +5,8 @@
 #include "InputMappingContext.h"
 #include "EnhancedInputComponent.h"
 #include "InputAction.h"
+#include "InGameHUD.h"
+#include "GameFramework/Pawn.h"
 
 void AInGamePC::SetupInputComponent()
 {
@@ -14,8 +16,9 @@ void AInGamePC::SetupInputComponent()
 
 	if (UEIC)
 	{
-		UEIC->BindAction(IA_LeftClick, ETriggerEvent::Started, this, &AInGamePC::OnStartClick);
-		UEIC->BindAction(IA_LeftClick, ETriggerEvent::Completed, this, &AInGamePC::OnEndClick);
+		UEIC->BindAction(IA_LeftClick, ETriggerEvent::Started, this, &AInGamePC::OnStartDrag);
+		UEIC->BindAction(IA_LeftClick, ETriggerEvent::Triggered, this, &AInGamePC::OnTriggerDrag);
+		UEIC->BindAction(IA_LeftClick, ETriggerEvent::Completed, this, &AInGamePC::OnEndDrag);
 		UEIC->BindAction(IA_Zoom, ETriggerEvent::Triggered, this, &AInGamePC::OnZoom);
 		UEIC->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AInGamePC::OnMove);
 	}
@@ -23,17 +26,8 @@ void AInGamePC::SetupInputComponent()
 
 void AInGamePC::Tick(float DeltaTime)
 {
-	if (bIsDragging)
-	{
-		UE_LOG(LogTemp, Warning,
-			TEXT("DragMinScreen : %f X %f Y"),
-			FMath::Min(DragStartScreen.X, DragEndScreen.X),
-			FMath::Min(DragStartScreen.Y, DragEndScreen.Y));
-		UE_LOG(LogTemp, Warning,
-			TEXT("DragMaxScreen : %f X %f Y"),
-			FMath::Max(DragStartScreen.X, DragEndScreen.X),
-			FMath::Max(DragStartScreen.Y, DragEndScreen.Y));
-	}
+	Super::Tick(DeltaTime);
+
 }
 
 void AInGamePC::OnPossess(APawn* aPawn)
@@ -62,19 +56,36 @@ void AInGamePC::OnUnPossess()
 	Super::OnUnPossess();
 }
 
-void AInGamePC::OnStartClick()
+void AInGamePC::OnStartDrag(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Start Drag!"));
 	bIsDragging = true;
-	GetMousePosition(DragStartScreen.X, DragStartScreen.Y);
+	GetMousePosition(DragStartPosition.X, DragStartPosition.Y);
 }
 
-void AInGamePC::OnEndClick()
+void AInGamePC::OnTriggerDrag(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("End Drag!"));
+
+	GetMousePosition(DragEndPosition.X, DragEndPosition.Y);
+}
+
+void AInGamePC::OnEndDrag(const FInputActionValue& Value)
+{
 	bIsDragging = false;
-	GetMousePosition(DragEndScreen.X, DragEndScreen.Y);
-	GetActorsInDragBound();
+
+	AInGameHUD* HUD = Cast<AInGameHUD>(GetHUD());
+	if (HUD)
+	{
+		ControlledGroups.Empty();
+
+		for (auto Actor : HUD->ActorsInDragBox)
+		{
+			ControlledGroups.AddUnique(Actor);
+		}
+		//for (auto InPawn : ControlledGroups)
+		//{
+		//	UE_LOG(LogTemp, Warning, TEXT("Selected Actor : %s"), *InPawn->GetName());
+		//}
+	}
 }
 
 void AInGamePC::OnZoom(const FInputActionValue& Value)

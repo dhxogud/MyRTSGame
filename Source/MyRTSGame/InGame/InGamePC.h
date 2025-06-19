@@ -40,22 +40,22 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Input", BlueprintReadWrite)
 	TObjectPtr<UInputAction> IA_Move;
 
-	uint8 bIsDragging : 1;
-
 	UPROPERTY(VisibleAnywhere, Category = "Data", BlueprintReadOnly)
-	TArray<TObjectPtr<AActor>> ControlledActors;
+	TArray<TObjectPtr<AActor>> ControlledGroups;
 
-	FVector2D DragStartScreen;
+	void OnStartDrag(const FInputActionValue& Value);
 
-	FVector2D DragEndScreen;
+	void OnTriggerDrag(const FInputActionValue& Value);
 
-	void OnStartClick();
-
-	void OnEndClick();
+	void OnEndDrag(const FInputActionValue& Value);
 
 	void OnZoom(const FInputActionValue& Value);
 
 	void OnMove(const FInputActionValue& Value);
 
 	void GetActorsInDragBound();
+
+	uint8 bIsDragging : 1;
+	FVector2D DragStartPosition;
+	FVector2D DragEndPosition;
 };
