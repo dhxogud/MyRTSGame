@@ -7,6 +7,17 @@
 #include "InputAction.h"
 #include "InGameHUD.h"
 #include "GameFramework/Pawn.h"
+#include "Kismet/KismetSystemLibrary.h"
+
+AInGamePC::AInGamePC()
+{
+	bShowMouseCursor = true;
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
+	bEnableTouchEvents = true;
+	bEnableTouchOverEvents = true;
+
+}
 
 void AInGamePC::SetupInputComponent()
 {
@@ -60,32 +71,23 @@ void AInGamePC::OnStartDrag(const FInputActionValue& Value)
 {
 	bIsDragging = true;
 	GetMousePosition(DragStartPosition.X, DragStartPosition.Y);
+
 }
 
 void AInGamePC::OnTriggerDrag(const FInputActionValue& Value)
 {
-
-	GetMousePosition(DragEndPosition.X, DragEndPosition.Y);
+	if (bIsDragging)
+	{
+		GetMousePosition(DragEndPosition.X, DragEndPosition.Y);
+	}
+	
 }
 
 void AInGamePC::OnEndDrag(const FInputActionValue& Value)
 {
 	bIsDragging = false;
 
-	AInGameHUD* HUD = Cast<AInGameHUD>(GetHUD());
-	if (HUD)
-	{
-		ControlledGroups.Empty();
-
-		for (auto Actor : HUD->ActorsInDragBox)
-		{
-			ControlledGroups.AddUnique(Actor);
-		}
-		//for (auto InPawn : ControlledGroups)
-		//{
-		//	UE_LOG(LogTemp, Warning, TEXT("Selected Actor : %s"), *InPawn->GetName());
-		//}
-	}
+	
 }
 
 void AInGamePC::OnZoom(const FInputActionValue& Value)

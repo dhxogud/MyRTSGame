@@ -19,6 +19,8 @@ class MYRTSGAME_API AInGamePC : public APlayerController
 	GENERATED_BODY()
 
 public:
+	AInGamePC();
+
 	virtual void SetupInputComponent() override;
 
 	virtual void Tick(float DeltaTime) override;
@@ -41,7 +43,7 @@ public:
 	TObjectPtr<UInputAction> IA_Move;
 
 	UPROPERTY(VisibleAnywhere, Category = "Data", BlueprintReadOnly)
-	TArray<TObjectPtr<AActor>> ControlledGroups;
+	TArray<AActor*> ControlledUnitGroups;
 
 	void OnStartDrag(const FInputActionValue& Value);
 
@@ -56,6 +58,10 @@ public:
 	void GetActorsInDragBound();
 
 	uint8 bIsDragging : 1;
+
+	UPROPERTY(VisibleAnywhere, Category = "Value", BlueprintReadOnly)
 	FVector2D DragStartPosition;
+
+	UPROPERTY(VisibleAnywhere, Category = "Value", BlueprintReadOnly)
 	FVector2D DragEndPosition;
 };
