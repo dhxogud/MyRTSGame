@@ -4,27 +4,40 @@
 #include "InGameHUD.h"
 #include "CanvasItem.h"
 #include "InGamePC.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 
 void AInGameHUD::DrawHUD()
 {
+	Super::DrawHUD();
+
 	AInGamePC* PC = Cast<AInGamePC>(GetOwningPlayerController());
-	if (IsValid(PC))
+	if (IsValid(PC) && PC->bIsDragging)
 	{
-		if (PC->bIsDragging)
+		TopLeft = FVector2D(FMath::Min(PC->CurrentScreenMousePointerPosition.X, PC->DragStartPointerPosition.X),
+			FMath::Min(PC->CurrentScreenMousePointerPosition.Y, PC->DragStartPointerPosition.Y));
+
+		BottomRight = FVector2D(FMath::Max(PC->CurrentScreenMousePointerPosition.X, PC->DragStartPointerPosition.X),
+			FMath::Max(PC->CurrentScreenMousePointerPosition.Y, PC->DragStartPointerPosition.Y));
+
+		float Width = BottomRight.X - TopLeft.X;
+		float Height = BottomRight.Y - TopLeft.Y;
+
+		DrawRect(struct FLinearColor(0, 0, 0, 0.3f), TopLeft.X, TopLeft.Y, Width, Height);
+
+		
+		TArray<AActor*> OutActors;
+		GetActorsInSelectionRectangle(ACharacter::StaticClass(), TopLeft, BottomRight, OutActors, false, false);
+
+		if (OutActors.Num() > 0)
 		{
-			TopLeft = FVector2D(FMath::Min(PC->DragStartPosition.X, PC->DragEndPosition.X),
-				FMath::Min(PC->DragStartPosition.Y, PC->DragEndPosition.Y));
-
-			BottomRight = FVector2D(FMath::Max(PC->DragStartPosition.X, PC->DragEndPosition.X),
-				FMath::Max(PC->DragStartPosition.Y, PC->DragEndPosition.Y));
-
-			float Width = BottomRight.X - TopLeft.X;
-			float Height = BottomRight.Y - TopLeft.Y;
-
-			DrawRect(struct FLinearColor(0, 0, 0, 0.3f), TopLeft.X, TopLeft.Y, Width, Height);
-
+			SelectedUnits.Empty();
+			for (AActor* Actor : OutActors)
+			{
+				ACharacter* Character = Cast<ACharacter>(Actor);
+				SelectedUnits.Add(Character);
+			}
 		}
+
 	}
 }
 

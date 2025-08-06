@@ -49,7 +49,7 @@ void AInGamePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 }
 
 
-void AInGamePawn::OnCameraZoom(float Value)
+void AInGamePawn::OnZoom(float Value)
 {
 	SpringArm->TargetArmLength += Value * -10.0f;
 	SpringArm->TargetArmLength = FMath::Clamp(SpringArm->TargetArmLength,
@@ -57,7 +57,7 @@ void AInGamePawn::OnCameraZoom(float Value)
 		600.0f);
 }
 
-void AInGamePawn::OnCameraMove(FVector2D Value)
+void AInGamePawn::OnMove(FVector Direction)
 {
-
+	AddActorWorldOffset(Direction * MoveSpeed);
 }

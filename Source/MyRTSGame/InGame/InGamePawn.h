@@ -39,7 +39,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Component", BlueprintReadWrite)
 	TObjectPtr<UCameraComponent> Camera;
 
-	void OnCameraZoom(float Value);
+	UPROPERTY(EditAnywhere, Category = "Value", BlueprintReadWrite)
+	float MoveSpeed = 1000.0f;
 
-	void OnCameraMove(FVector2D Value);
+	UPROPERTY(EditAnywhere, Category = "Value", BlueprintReadWrite)
+	float ZoomSpeed = 180.0f;
+
+	void OnZoom(float Value);
+
+	void OnMove(FVector Direction);
 };

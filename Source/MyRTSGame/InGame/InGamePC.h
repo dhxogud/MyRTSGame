@@ -23,6 +23,8 @@ public:
 
 	virtual void SetupInputComponent() override;
 
+	virtual void BeginPlay() override;
+
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void OnPossess(APawn* aPawn) override;
@@ -34,34 +36,30 @@ public:
 	TObjectPtr<UInputMappingContext> IMC_Default;
 
 	UPROPERTY(EditAnywhere, Category = "Input", BlueprintReadWrite)
-	TObjectPtr<UInputAction> IA_LeftClick;
+	TObjectPtr<UInputAction> IA_Click;
+
+	UPROPERTY(EditAnywhere, Category = "Input", BlueprintReadWrite)
+	TObjectPtr<UInputAction> IA_SetDestination;
 
 	UPROPERTY(EditAnywhere, Category = "Input", BlueprintReadWrite)
 	TObjectPtr<UInputAction> IA_Zoom;
 
-	UPROPERTY(EditAnywhere, Category = "Input", BlueprintReadWrite)
-	TObjectPtr<UInputAction> IA_Move;
-
 	UPROPERTY(VisibleAnywhere, Category = "Data", BlueprintReadOnly)
 	TArray<AActor*> ControlledUnitGroups;
 
-	void OnStartDrag(const FInputActionValue& Value);
+	void OnPointerDown(const FInputActionValue& Value);
 
-	void OnTriggerDrag(const FInputActionValue& Value);
-
-	void OnEndDrag(const FInputActionValue& Value);
+	void OnPointerUp(const FInputActionValue& Value);
 
 	void OnZoom(const FInputActionValue& Value);
-
-	void OnMove(const FInputActionValue& Value);
 
 	void GetActorsInDragBound();
 
 	uint8 bIsDragging : 1;
 
-	UPROPERTY(VisibleAnywhere, Category = "Value", BlueprintReadOnly)
-	FVector2D DragStartPosition;
+	FVector2D CurrentScreenMousePointerPosition;
 
 	UPROPERTY(VisibleAnywhere, Category = "Value", BlueprintReadOnly)
-	FVector2D DragEndPosition;
+	FVector2D DragStartPointerPosition;
+	
 };

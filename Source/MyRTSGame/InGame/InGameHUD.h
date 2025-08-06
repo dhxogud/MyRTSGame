@@ -9,6 +9,8 @@
 /**
  * 
  */
+class ACharacter;
+
 UCLASS()
 class MYRTSGAME_API AInGameHUD : public AHUD
 {
@@ -17,8 +19,9 @@ class MYRTSGAME_API AInGameHUD : public AHUD
 public:
 	virtual void DrawHUD() override;
 
-	bool bShouldDrawBox = false;
-
 	FVector2D TopLeft;
 	FVector2D BottomRight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<TObjectPtr<ACharacter>> SelectedUnits;
 };
