@@ -23,8 +23,8 @@ AInGamePawn::AInGamePawn()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
-	SpringArm->TargetArmLength = 800.0f;
-	SpringArm->SetRelativeRotation(FRotator(-70.0f, 0, 0));
+	SpringArm->TargetArmLength = 1000.0f;
+	SpringArm->SetRelativeRotation(FRotator(-85.0f, 0, 0));
 }
 
 // Called when the game starts or when spawned
