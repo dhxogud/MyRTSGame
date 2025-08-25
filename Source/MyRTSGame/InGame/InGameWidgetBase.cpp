@@ -3,28 +3,28 @@
 
 #include "InGameWidgetBase.h"
 
-UInGameWidgetBase::UInGameWidgetBase()
-{
-
-}
-
 void UInGameWidgetBase::NativeOnInitialized()
 {
+	Super::NativeOnInitialized();
 
 }
 
 void UInGameWidgetBase::NativePreConstruct()
 {
+	Super::NativePreConstruct();
 
 }
 
 void UInGameWidgetBase::NativeConstruct()
 {
+	Super::NativeConstruct();
+
 
 }
 
 void UInGameWidgetBase::NativeDestruct()
 {
+	Super::NativeDestruct();
 
 }
 
@@ -33,22 +33,12 @@ void UInGameWidgetBase::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 
 }
 
-void UInGameWidgetBase::ShowInGamePanel()
+void UInGameWidgetBase::ShowDefaultInGamePanels()
 {
 
 }
 
-void UInGameWidgetBase::HideInGamePanel()
-{
-
-}
-
-void UInGameWidgetBase::VisibleSettingWidget()
-{
-
-}
-
-void UInGameWidgetBase::CollapasedSettingWidget()
+void UInGameWidgetBase::HideDefaultInGamePanels()
 {
 
 }

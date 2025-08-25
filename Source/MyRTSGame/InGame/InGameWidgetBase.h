@@ -9,24 +9,49 @@
 /**
  * 
  */
+
 UCLASS()
 class MYRTSGAME_API UInGameWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public:
-	UInGameWidgetBase();
 	virtual void NativeOnInitialized() override;
 	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
-	void ShowInGamePanel();
-	void HideInGamePanel();
-	void VisibleSettingWidget();
-	void CollapasedSettingWidget();
+	void ShowDefaultInGamePanels();
+	void HideDefaultInGamePanels();
+	
 
 public:
-	// 설정창, 미니맵, 유닛 컨트롤 패널, 유닛 모음 정보창, 유닛 초상화
+	// GamePlaying
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> MiniMapPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> TimerPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> UnitInforPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> UnitPortraitPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> UnitControlPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> ResourceInforPanel;
+
+
+	// NetWork
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> ChattingPanel;
+
+	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	TObjectPtr<UUserWidget> AlertPanel;
+
 };
