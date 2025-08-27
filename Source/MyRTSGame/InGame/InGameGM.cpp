@@ -3,3 +3,9 @@
 
 #include "InGameGM.h"
 
+void AInGameGM::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//GetWorld()->GetTimerManager().SetTimer(LeftTimerHandle)
+}

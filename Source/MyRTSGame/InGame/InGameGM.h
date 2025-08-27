@@ -14,4 +14,9 @@ class MYRTSGAME_API AInGameGM : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+
+public:
+	void BeginPlay() override;
+
+	FTimerHandle LeftTimerHandle;
 };

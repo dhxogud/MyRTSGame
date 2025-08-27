@@ -4,14 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "InGameWidgetBase.generated.h"
+#include "InGameHUDWidget.generated.h"
 
 /**
  * 
  */
 
 UCLASS()
-class MYRTSGAME_API UInGameWidgetBase : public UUserWidget
+class MYRTSGAME_API UInGameHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
@@ -25,6 +25,7 @@ public:
 	void ShowDefaultInGamePanels();
 	void HideDefaultInGamePanels();
 	
+	
 
 public:
 	// GamePlaying
@@ -35,23 +36,22 @@ public:
 	TObjectPtr<UUserWidget> TimerPanel;
 
 	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> UnitInforPanel;
+	TObjectPtr<UUserWidget> InforPanel;
 
 	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> UnitPortraitPanel;
+	TObjectPtr<UUserWidget> PortraitPanel;
 
 	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> UnitControlPanel;
+	TObjectPtr<UUserWidget> CommandPanel;
 
 	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> ResourceInforPanel;
+	TObjectPtr<UUserWidget> ResourcePanel;
 
 
 	// NetWork
 	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> ChattingPanel;
+	TObjectPtr<UUserWidget> ChatPanel;
 
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> AlertPanel;
-
+	//UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	//TObjectPtr<UUserWidget> AlertPanel; 이건 따로 패널 만들지 말고 텍스트 한줄 띄우자 그냥
 };
