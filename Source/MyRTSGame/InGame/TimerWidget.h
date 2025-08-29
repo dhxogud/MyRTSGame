@@ -20,6 +20,9 @@ public:
 	//virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
 
+	UFUNCTION()
+	void UpdateGameTime(double InElapsedGameTimedouble);
+
 	UPROPERTY(meta=(BindWidgetOptional), VisibleAnywhere, Category = "UI", BlueprintReadOnly)
 	TObjectPtr<UTextBlock> TimeText;
 };

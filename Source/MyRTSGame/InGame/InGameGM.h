@@ -13,10 +13,7 @@ UCLASS()
 class MYRTSGAME_API AInGameGM : public AGameModeBase
 {
 	GENERATED_BODY()
-	
 
 public:
-	void BeginPlay() override;
-
-	FTimerHandle LeftTimerHandle;
+	virtual void Tick(float deltaSeconds) override;
 };

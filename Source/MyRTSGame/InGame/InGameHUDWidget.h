@@ -16,15 +16,11 @@ class MYRTSGAME_API UInGameHUDWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	virtual void NativeOnInitialized() override;
-	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
-	virtual void NativeDestruct() override;
-	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	void ShowDefaultInGamePanels();
 	void HideDefaultInGamePanels();
-	
+	void UpdateGameTime(double InElapsedGameTimedouble);
 	
 
 public:

@@ -1,11 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "InGameGM.h"
 
-void AInGameGM::BeginPlay()
+void AInGameGM::Tick(float deltaSeconds)
 {
-	Super::BeginPlay();
 
-	//GetWorld()->GetTimerManager().SetTimer(LeftTimerHandle)
 }

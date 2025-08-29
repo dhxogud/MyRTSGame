@@ -3,33 +3,9 @@
 
 #include "InGameHUDWidget.h"
 
-void UInGameHUDWidget::NativeOnInitialized()
-{
-	Super::NativeOnInitialized();
-
-}
-
-void UInGameHUDWidget::NativePreConstruct()
-{
-	Super::NativePreConstruct();
-
-}
-
 void UInGameHUDWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-
-}
-
-void UInGameHUDWidget::NativeDestruct()
-{
-	Super::NativeDestruct();
-
-}
-
-void UInGameHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
-{
 
 }
 
@@ -42,3 +18,5 @@ void UInGameHUDWidget::HideDefaultInGamePanels()
 {
 
 }
+
+
