@@ -9,7 +9,8 @@
 /**
  * 
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventDispatcher_UpdateGameTime, double, ElapsedGameTime);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventDispatcher_ElapsedGameTime, double, InElapsedGameTime);
 
 UCLASS()
 class MYRTSGAME_API AInGameGS : public AGameStateBase
@@ -17,17 +18,15 @@ class MYRTSGAME_API AInGameGS : public AGameStateBase
 	GENERATED_BODY()
 
 public:
-	virtual void BeginPlay() override;
 
-	void UpdateGameTime();
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FEventDispatcher_UpdateGameTime EventDispatcher_UpdateGameTime;
-
-	UPROPERTY(Replicated, VisibleAnywhere, Category = "Data", BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing = OnRep_ElapsedGameTime, VisibleAnywhere, Category = "Data", BlueprintReadOnly)
 	double ElapsedGameTime;
 
-	FTimerHandle GameTimerHandle;
+	UPROPERTY(BlueprintAssignable)
+	FEventDispatcher_ElapsedGameTime EventElapsedGameTime;
+
+	UFUNCTION()
+	void OnRep_ElapsedGameTime();
 
 	virtual void GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const override;
 };

@@ -2,26 +2,12 @@
 
 
 #include "InGameGS.h"
-#include "TimerManager.h"
 #include "Net/UnrealNetwork.h"
 
-void AInGameGS::BeginPlay()
+void AInGameGS::OnRep_ElapsedGameTime()
 {
-	if (HasAuthority())
-	{
-		UWorld* World = GetWorld();
-		if (World)
-		{
-			World->GetTimerManager().SetTimer(GameTimerHandle, this, &AInGameGS::UpdateGameTime, 1.0f, true);
-		}
-	}
-	
-}
+	EventElapsedGameTime.Broadcast(ElapsedGameTime);
 
-void AInGameGS::UpdateGameTime()
-{
-	ElapsedGameTime += 1.0f;
-	EventDispatcher_UpdateGameTime.Broadcast(ElapsedGameTime);
 }
 
 void AInGameGS::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const

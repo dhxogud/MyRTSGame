@@ -15,5 +15,9 @@ class MYRTSGAME_API AInGameGM : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	virtual void Tick(float deltaSeconds) override;
+	virtual void BeginPlay() override;
+
+	void UpdateGameTimePerSecond();
+
+	FTimerHandle GameTimerHandle;
 };

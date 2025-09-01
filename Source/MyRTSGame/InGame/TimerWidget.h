@@ -17,7 +17,6 @@ class MYRTSGAME_API UTimerWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	//virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
 
 	UFUNCTION()
