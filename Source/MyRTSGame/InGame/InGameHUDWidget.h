@@ -25,27 +25,23 @@ public:
 
 public:
 	// GamePlaying
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> MiniMapPanel;
 
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
-	TObjectPtr<UUserWidget> TimerPanel;
-
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> InforPanel;
 
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> PortraitPanel;
 
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> CommandPanel;
 
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> ResourcePanel;
 
-
 	// NetWork
-	UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)
+	UPROPERTY(meta = (BindWidgetOptional), EditAnyWhere, Category = "UI", BlueprintReadWrite)
 	TObjectPtr<UUserWidget> ChatPanel;
 
 	//UPROPERTY(EditAnyWhere, Category = "UI", BlueprintReadWrite)

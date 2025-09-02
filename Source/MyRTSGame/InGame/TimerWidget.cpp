@@ -7,8 +7,6 @@
 void UTimerWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-	
 }
 
 void UTimerWidget::UpdateGameTime(double InElapsedGameTimedouble)
